@@ -31,6 +31,14 @@ namespace EnginesApi.Controller
             return (await _enginesService.GetAll()).ContentOrError();
         }
 
+        // GET: api/Engines?Name
+        [HttpGet("[Action]")]
+        [ActionName("search")]
+        public async Task<IActionResult> SearchEngines([FromQuery] string name)
+        {
+            return (await _enginesService.Search(name)).ContentOrError();
+        }
+
         //GET: api/Engines/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEngine(long id)

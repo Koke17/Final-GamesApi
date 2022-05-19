@@ -19,6 +19,7 @@ namespace VideogamesApi.Services
         Task<IOperationResult> Update(long id, UpdateEngineDto updateEngineDto);
         Task<IOperationResult> Create(CreateEngineDto newEngineDto);
         Task<IOperationResult> Delete(long id);
+        Task<IOperationResult> Search(string name);
     }
 
     public class EnginesService : IEnginesService
@@ -131,6 +132,22 @@ namespace VideogamesApi.Services
 
                 return OperationResult.Success();
 
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IOperationResult> Search(string name)
+        {
+            try
+            {
+                var searchEngines = await _context.Engines
+                    .Where(s => s.Name.ToLower().Contains(name.ToLower()))
+                    .ToListAsync(CancellationToken.None);
+
+                return OperationResult.Success(searchEngines);
             }
             catch (System.Exception ex)
             {

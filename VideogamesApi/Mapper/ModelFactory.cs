@@ -29,13 +29,13 @@ namespace VideogamesApi.Mapper
             {
                 EngineId = newVideogame.EngineId,
                 Mode = newVideogame.Mode,
-                Name = newVideogame.VideogameName
+                Name = newVideogame.Name
             };
         }
 
         public void UpdateVideogameFactory(Videogame dbVideogame, UpdateVideogameDto updateVideogameDto)
         {
-            dbVideogame.Name = updateVideogameDto.VideogameName;
+            dbVideogame.Name = updateVideogameDto.Name;
             dbVideogame.Mode = updateVideogameDto.Mode;
             dbVideogame.EngineId = updateVideogameDto.EngineId;
         }
@@ -44,7 +44,7 @@ namespace VideogamesApi.Mapper
         {
             return new Engine
             {
-                Name = newEngine.EngineName,
+                Name = newEngine.Name,
                 ProgrammingLanguage = newEngine.ProgrammingLanguage,
                 DevelopmentStudioId = newEngine.DevelopmentStudioId
             };
@@ -52,7 +52,7 @@ namespace VideogamesApi.Mapper
 
         public void UpdateEngineFactory(Engine dbEngine, UpdateEngineDto updateEngineDto) 
         {
-                dbEngine.Name = updateEngineDto.EngineName;
+                dbEngine.Name = updateEngineDto.Name;
                 dbEngine.ProgrammingLanguage = updateEngineDto.ProgrammingLanguage;
                 dbEngine.DevelopmentStudioId = updateEngineDto.DevelopmentStudioId;
         } 
@@ -61,7 +61,7 @@ namespace VideogamesApi.Mapper
         {
             return new DevelopmentStudio
             {
-                Name = newDevelopmentStudio.DevelopmentStudioName,
+                Name = newDevelopmentStudio.Name,
                 Employees = newDevelopmentStudio.Employees,
                 FoundationDate = newDevelopmentStudio.FoundationDate
             };
@@ -69,21 +69,21 @@ namespace VideogamesApi.Mapper
 
         public void UpdateDevelopmentStudioFactory(DevelopmentStudio dbDevelopmentStudio, UpdateDevelopmentStudioDto updateDevelopmentStudioDto)
         {
-            dbDevelopmentStudio.Name = updateDevelopmentStudioDto.DevelopmentStudioName;
+            dbDevelopmentStudio.Name = updateDevelopmentStudioDto.Name;
             dbDevelopmentStudio.Employees = updateDevelopmentStudioDto.Employees;
             dbDevelopmentStudio.FoundationDate = updateDevelopmentStudioDto.FoundationDate;
         }
 
         public void UpdateGenreFactory(Genre dbGenre, UpdateGenreDto updateGenreDto)
         {
-            dbGenre.Name = updateGenreDto.GenreName;
+            dbGenre.Name = updateGenreDto.Name;
         }
 
         public Genre CreateGenreFactory(CreateGenreDto newGenre)
         {
             return new Genre
             {
-                Name = newGenre.GenreName
+                Name = newGenre.Name
             };
         }
         

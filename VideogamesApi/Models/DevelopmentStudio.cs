@@ -10,6 +10,7 @@ namespace VideogamesApi
         public DevelopmentStudio()
         {
             Engines = new HashSet<Engine>();
+            DevelopmentStudioVideogame = new HashSet<DevelopmentStudioVideogame>();
         }
 
         public long Id { get; set; }
@@ -18,5 +19,6 @@ namespace VideogamesApi
         public DateTime? FoundationDate { get; set; }
 
         public virtual ICollection<Engine> Engines { get; set; }
+        public virtual ICollection<DevelopmentStudioVideogame> DevelopmentStudioVideogame { get; set; }
     }
 }

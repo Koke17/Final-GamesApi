@@ -4,7 +4,7 @@ namespace VideogamesApi.Dtos
 {
     public class CreateGenreDto
     {
-        public string GenreName { get; set; }
+        public string Name { get; set; }
 
     }
 }

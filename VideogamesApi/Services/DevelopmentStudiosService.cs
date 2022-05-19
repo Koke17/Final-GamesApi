@@ -19,6 +19,8 @@ namespace VideogamesApi.Services
         Task<IOperationResult> Update(long id, UpdateDevelopmentStudioDto updateDevelopmentStudiosDto);
         Task<IOperationResult> Create(CreateDevelopmentStudioDto newDevelopmentStudioDto);
         Task<IOperationResult> Delete(long id);
+        Task<IOperationResult> Search(string name);
+
     }
 
     public class DevelopmentStudiosService : IDevelopmentStudiosService
@@ -132,6 +134,22 @@ namespace VideogamesApi.Services
 
                 return OperationResult.Success();
 
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IOperationResult> Search(string name)
+        {
+            try
+            {
+                var searchDevelopmentStudios = await _context.DevelopmentStudios
+                    .Where(s => s.Name.ToLower().Contains(name.ToLower()))
+                    .ToListAsync(CancellationToken.None);
+
+                return OperationResult.Success(searchDevelopmentStudios);
             }
             catch (System.Exception ex)
             {

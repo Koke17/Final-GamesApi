@@ -2,7 +2,7 @@
 {
     public class UpdateGenreDto
     {
-        public string GenreName { get; set; }
+        public string Name { get; set; }
 
     }
 }

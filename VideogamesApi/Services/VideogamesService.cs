@@ -18,6 +18,8 @@ namespace VideogamesApi.Services
         Task<IOperationResult> Update(long id, UpdateVideogameDto updateVideogameDto);
         Task<IOperationResult> Create(CreateVideogameDto newVideogame);
         Task<IOperationResult> Delete(long id);
+        Task<IOperationResult> Search(string name);
+
     }
 
     public class VideogamesService : IVideogamesService
@@ -62,10 +64,12 @@ namespace VideogamesApi.Services
                 var videogameDto = await _context.Videogames
                     .Where(v => v.Id == id)
                     .Include(v => v.Engine)
+                    .Include(v => v.DevelopmentStudioVideogame)
+                    .Include(v => v.GenreVideogame)
                     .Select(v => _mapper.Map<VideogameDto>(v))
                     .FirstOrDefaultAsync(CancellationToken.None);
                 if (videogameDto == null) return OperationResult.NotFound();
-                await ApplyAdditionalData(videogameDto);
+                //await ApplyAdditionalData(videogameDto);
                 return OperationResult.Success(videogameDto);
             }
             catch (System.Exception ex)
@@ -111,7 +115,7 @@ namespace VideogamesApi.Services
 
             var dbDevelopmentStudioVideogames = await _context.DevelopmentStudioVideogames.Where(gv => gv.VideogameId == id).ToListAsync(CancellationToken.None);
             dbDevelopmentStudioVideogames.ForEach(dv => _context.DevelopmentStudioVideogames.Remove(dv));
-            foreach (var developerId in updateVideogameDto.DeveloperIds)
+            foreach (var developerId in updateVideogameDto.DevelopmentStudioIds)
             {
                 _context.DevelopmentStudioVideogames.Add(new DevelopmentStudioVideogame
                 {
@@ -185,22 +189,38 @@ namespace VideogamesApi.Services
             }
         }
 
+        public async Task<IOperationResult> Search(string name)
+        {
+            try
+            {
+                var searchVideogames = await _context.Videogames
+                    .Where(s => s.Name.ToLower().Contains(name.ToLower()))
+                    .ToListAsync(CancellationToken.None);
+
+                return OperationResult.Success(searchVideogames);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         private async Task ApplyAdditionalData(VideogameDto videogameDto)
         {
-            videogameDto.DevelopmentStudios = await _context.DevelopmentStudios
-                .Where(d => _context.DevelopmentStudioVideogames
-                    .Where(dv => dv.VideogameId == videogameDto.Id)
-                    .Select(dv => dv.DevelopmentStudioId)
-                    .ToList()
-                    .Contains(d.Id))
-                .ToListAsync(CancellationToken.None);
-            videogameDto.Genres = await _context.Genres
-                .Where(g => _context.GenreVideogames
-                    .Where(gv => gv.VideogameId == videogameDto.Id)
-                    .Select(gv => gv.GenreId)
-                    .ToList()
-                    .Contains(g.Id))
-                .ToListAsync(CancellationToken.None);
+            //videogamedto.developmentstudios = await _context.developmentstudios
+            //    .where(d => _context.developmentstudiovideogames
+            //        .where(dv => dv.videogameid == videogamedto.id)
+            //        .select(dv => dv.developmentstudioid)
+            //        .tolist()
+            //        .contains(d.id))
+            //    .tolistasync(cancellationtoken.none);
+            //videogamedto.genres = await _context.genres
+            //    .where(g => _context.genrevideogames
+            //        .where(gv => gv.videogameid == videogamedto.id)
+            //        .select(gv => gv.genreid)
+            //        .tolist()
+            //        .contains(g.id))
+            //    .tolistasync(cancellationtoken.none);
         }
 
        

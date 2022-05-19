@@ -37,6 +37,14 @@ namespace VideogamesApi.Controller
             return (await _videogamesService.Get(id)).ContentOrError();
         }
 
+        // GET: api/Videogames?Name
+        [HttpGet("[Action]")]
+        [ActionName("search")]
+        public async Task<IActionResult> SearchVideogames([FromQuery] string name)
+        {
+            return (await _videogamesService.Search(name)).ContentOrError();
+        }
+
         //// PUT: api/Videogames/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

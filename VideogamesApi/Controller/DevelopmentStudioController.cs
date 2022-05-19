@@ -37,6 +37,14 @@ namespace DevelopmentStudio.Controller
             return (await _DevelopmentStudiosService.Get(id)).ContentOrError();
         }
 
+        // GET: api/DevelopmentStudios?Name
+        [HttpGet("[Action]")]
+        [ActionName("search")]
+        public async Task<IActionResult> SearchDevelopmentStudios([FromQuery] string name)
+        {
+            return (await _DevelopmentStudiosService.Search(name)).ContentOrError();
+        }
+
         //// PUT: api/DevelopmentStudios/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Linq;
 using VideogamesApi.Dtos;
 
 namespace VideogamesApi.Mapper
@@ -8,9 +9,12 @@ namespace VideogamesApi.Mapper
         public DomainProfile()
         {
             CreateMap<Videogame, VideogameDto>()
-                .ForMember(d => d.DevelopmentStudios, opt => opt.Ignore())
-                .ForMember(d => d.EngineDto, opt => opt.MapFrom(dest => dest.Engine))
-                .ForMember(d => d.Genres, opt => opt.Ignore());
+                .ForMember(d => d.DevelopmentStudioIds, opt => opt.MapFrom(dest => dest.DevelopmentStudioVideogame
+                .Select(d => d.DevelopmentStudioId)))
+                .ForMember(d => d.GenreIds, opt => opt.MapFrom(dest => dest.GenreVideogame
+                .Select(d => d.GenreId)))
+                .ForMember(d => d.EngineDto, opt => opt.MapFrom(dest => dest.Engine));
+                
 
             CreateMap<Engine, EngineDto>();
 

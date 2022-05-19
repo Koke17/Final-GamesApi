@@ -63,13 +63,13 @@ namespace VideogamesApi
                 entity.Property(e => e.VideogameId).HasColumnName("Videogame_ID");
 
                 entity.HasOne(d => d.DevelopmentStudio)
-                    .WithMany()
+                    .WithMany(d => d.DevelopmentStudioVideogame)
                     .HasForeignKey(d => d.DevelopmentStudioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Development_StudioVideogame_Development_Studio");
 
                 entity.HasOne(d => d.Videogame)
-                    .WithMany()
+                    .WithMany(d => d.DevelopmentStudioVideogame)
                     .HasForeignKey(d => d.VideogameId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Development_StudioVideogame_Videogame");
@@ -121,13 +121,13 @@ namespace VideogamesApi
                 entity.Property(e => e.VideogameId).HasColumnName("Videogame_ID");
 
                 entity.HasOne(d => d.Genre)
-                    .WithMany()
+                    .WithMany(d => d.GenreVideogame)
                     .HasForeignKey(d => d.GenreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GenreVideogame_Genre");
 
                 entity.HasOne(d => d.Videogame)
-                    .WithMany()
+                    .WithMany(d => d.GenreVideogame)
                     .HasForeignKey(d => d.VideogameId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GenreVideogame_Videogame");
@@ -135,11 +135,13 @@ namespace VideogamesApi
 
             modelBuilder.Entity<Videogame>(entity =>
             {
+                entity.HasKey(r => r.Id );
+
                 entity.ToTable("Videogame");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("ID");
+                //entity.Property(e => e.Id)
+                //    .ValueGeneratedOnAdd()
+                //    .HasColumnName("ID");
 
                 entity.Property(e => e.EngineId).HasColumnName("Engine_ID");
 

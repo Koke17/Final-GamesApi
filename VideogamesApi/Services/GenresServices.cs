@@ -19,6 +19,7 @@ namespace VideogamesApi.Services
         Task<IOperationResult> Update(long id, UpdateGenreDto updateGenresDto);
         Task<IOperationResult> Create(CreateGenreDto newGenreDto);
         Task<IOperationResult> Delete(long id);
+        Task<IOperationResult> Search(string name);
     }
 
     public class GenresService : IGenresService
@@ -138,8 +139,21 @@ namespace VideogamesApi.Services
             }
         }
 
+        public async Task<IOperationResult> Search(string name)
+        {
+            try
+            {
+                var searchGenres = await _context.Genres
+                    .Where(s => s.Name.ToLower().Contains(name.ToLower()))
+                    .ToListAsync(CancellationToken.None);
 
-
+                return OperationResult.Success(searchGenres);
+            }
+            catch(System.Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

@@ -36,6 +36,12 @@ namespace VideogamesApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VideogamesApi", Version = "v1" });
             });
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.WithOrigins("*")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<GamesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VideogamesDbConnectionString")));
             services.AddSingleton(Configuration)
@@ -56,6 +62,7 @@ namespace VideogamesApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VideogamesApi v1"));
             }
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 

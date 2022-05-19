@@ -31,6 +31,14 @@ namespace GenresApi.Controller
             return (await _GenresService.GetAll()).ContentOrError();
         }
 
+        // GET: api/Genres?Name
+        [HttpGet("[Action]")]
+        [ActionName("search")]
+        public async Task<IActionResult> SearchGenres([FromQuery] string name)
+        {
+            return (await _GenresService.Search(name)).ContentOrError();
+        }
+
         //GET: api/Genres/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGenre(long id)
