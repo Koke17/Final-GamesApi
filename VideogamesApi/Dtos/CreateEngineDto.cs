@@ -7,6 +7,8 @@ namespace VideogamesApi.Dtos
         public string Name { get; set; }
         public string ProgrammingLanguage { get; set; }
         public long DevelopmentStudioId { get; set; }
+        public string ImgPath { get; set; }
+
 
     }
 }

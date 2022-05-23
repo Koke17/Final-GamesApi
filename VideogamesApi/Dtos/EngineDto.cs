@@ -12,6 +12,9 @@ namespace VideogamesApi.Dtos
 
         public DevelopmentStudioDto DevelopmentStudioDto { get; set; }
 
+        public string ImgPath { get; set; }
+
+
 
     }
 }

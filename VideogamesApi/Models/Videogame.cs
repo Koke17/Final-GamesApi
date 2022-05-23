@@ -22,5 +22,7 @@ namespace VideogamesApi
 
         public ICollection<GenreVideogame> GenreVideogame { get; set; }
         public ICollection<DevelopmentStudioVideogame> DevelopmentStudioVideogame { get; set; }
+
+        public string ImgPath { get; set; }
     }
 }

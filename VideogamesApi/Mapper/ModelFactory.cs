@@ -29,7 +29,8 @@ namespace VideogamesApi.Mapper
             {
                 EngineId = newVideogame.EngineId,
                 Mode = newVideogame.Mode,
-                Name = newVideogame.Name
+                Name = newVideogame.Name,
+                ImgPath = newVideogame.ImgPath,
             };
         }
 
@@ -38,6 +39,7 @@ namespace VideogamesApi.Mapper
             dbVideogame.Name = updateVideogameDto.Name;
             dbVideogame.Mode = updateVideogameDto.Mode;
             dbVideogame.EngineId = updateVideogameDto.EngineId;
+            dbVideogame.ImgPath = updateVideogameDto.ImgPath;
         }
 
         public Engine CreateEngineFactory(CreateEngineDto  newEngine)
@@ -46,7 +48,8 @@ namespace VideogamesApi.Mapper
             {
                 Name = newEngine.Name,
                 ProgrammingLanguage = newEngine.ProgrammingLanguage,
-                DevelopmentStudioId = newEngine.DevelopmentStudioId
+                DevelopmentStudioId = newEngine.DevelopmentStudioId,
+                ImgPath = newEngine.ImgPath,
             };
         }
 
@@ -55,6 +58,7 @@ namespace VideogamesApi.Mapper
                 dbEngine.Name = updateEngineDto.Name;
                 dbEngine.ProgrammingLanguage = updateEngineDto.ProgrammingLanguage;
                 dbEngine.DevelopmentStudioId = updateEngineDto.DevelopmentStudioId;
+                dbEngine.ImgPath = updateEngineDto.ImgPath;
         } 
         
         public DevelopmentStudio CreateDevelopmentStudioFactory(CreateDevelopmentStudioDto newDevelopmentStudio)
@@ -63,7 +67,8 @@ namespace VideogamesApi.Mapper
             {
                 Name = newDevelopmentStudio.Name,
                 Employees = newDevelopmentStudio.Employees,
-                FoundationDate = newDevelopmentStudio.FoundationDate
+                FoundationDate = newDevelopmentStudio.FoundationDate,
+                ImgPath=newDevelopmentStudio.ImgPath,
             };
         }
 
@@ -72,6 +77,7 @@ namespace VideogamesApi.Mapper
             dbDevelopmentStudio.Name = updateDevelopmentStudioDto.Name;
             dbDevelopmentStudio.Employees = updateDevelopmentStudioDto.Employees;
             dbDevelopmentStudio.FoundationDate = updateDevelopmentStudioDto.FoundationDate;
+            dbDevelopmentStudio.ImgPath = updateDevelopmentStudioDto.ImgPath;
         }
 
         public void UpdateGenreFactory(Genre dbGenre, UpdateGenreDto updateGenreDto)

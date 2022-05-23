@@ -9,6 +9,8 @@ namespace VideogamesApi.Dtos
         public long EngineId { get; set; }
         public IList<long> DevelopmentStudioIds { get; set; }
         public IList<long> GenreIds { get; set; }
+        public string ImgPath { get; set; }
+
 
     }
 }

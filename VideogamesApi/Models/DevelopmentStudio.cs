@@ -20,5 +20,8 @@ namespace VideogamesApi
 
         public virtual ICollection<Engine> Engines { get; set; }
         public virtual ICollection<DevelopmentStudioVideogame> DevelopmentStudioVideogame { get; set; }
+
+        public string ImgPath { get; set; }
+
     }
 }

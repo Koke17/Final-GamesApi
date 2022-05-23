@@ -21,5 +21,8 @@ namespace VideogamesApi
 
         public virtual ICollection<Videogame> Videogames { get; set; }
 
+        public string ImgPath { get; set; }
+
+
     }
 }

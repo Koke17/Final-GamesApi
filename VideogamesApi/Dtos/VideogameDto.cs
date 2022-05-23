@@ -11,6 +11,7 @@ namespace VideogamesApi.Dtos
         public EngineDto EngineDto { get; set; }
         public IList<long> DevelopmentStudioIds { get; set; }
         public IList<long> GenreIds { get; set; }
+        public string ImgPath { get; set; }
     }
 
 }

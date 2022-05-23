@@ -9,6 +9,8 @@ namespace VideogamesApi.Dtos
         public string Name { get; set; }
         public int Employees { get; set; }
         public DateTime FoundationDate { get; set; }
+        public string ImgPath { get; set; }
+
 
     }
 
